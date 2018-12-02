@@ -13,10 +13,16 @@ namespace TechJobs.Controllers
             return View();
         }
 
+        // TODO #1 - Create a Results action method to process 
+            //parameters- type of search, search term
+                //named based on corresponding form field names
+        // search request and display results
+
         public IActionResult Results(string searchType, string searchTerm)
         {
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
             if (searchType.Equals("all"))
+            // if (searchType == "all")
             {
                 jobs = JobData.FindByValue(searchTerm);
             }
@@ -26,16 +32,13 @@ namespace TechJobs.Controllers
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm); 
             }
 
+  
             ViewBag.columns = ListController.columnChoices;
             ViewBag.jobs = jobs;
      
             return View("Index");
         }
 
-        // TODO #1 - Create a Results action method to process 
-            //parameters- type of search, search term
-                //named based on corresponding form field names
-        // search request and display results
 
     }
 }
